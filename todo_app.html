@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #current-date {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        #new-todo {
+            padding: 10px;
+            font-size: 1em;
+            width: 300px;
+            margin-right: 10px;
+        }
+        #add-todo {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+        button {
+            background: #ff4d4d;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        button:hover {
+            background: #ff1a1a;
+        }
+    </style>
+</head>
+<body>
+    <h1>TODO App</h1>
+    <div id="current-date"></div>
+    <input type="text" id="new-todo" placeholder="Enter new todo">
+    <button id="add-todo">Add</button>
+    <ul id="todo-list"></ul>
+
+    <script>
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString();
+        
+        document.getElementById('add-todo').addEventListener('click', function() {
+            var input = document.getElementById('new-todo');
+            var text = input.value.trim();
+            if (text) {
+                var li = document.createElement('li');
+                li.innerHTML = `
+                    <input type="checkbox" onchange="this.parentNode.classList.toggle('completed')">
+                    <span>${text}</span>
+                    <button onclick="this.parentNode.remove()">Delete</button>
+                `;
+                document.getElementById('todo-list').appendChild(li);
+                input.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
